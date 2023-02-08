@@ -2,12 +2,46 @@ import { memo } from 'react';
 import clsx from 'clsx';
 import { css } from '@linaria/core';
 
-import { cell, cellFrozenLast, rowClassname, rowSelectedClassname } from './style';
+import { rowClassname, rowSelectedClassname } from './style';
 import { SELECT_COLUMN_KEY } from './Columns';
 import GroupCell from './GroupCell';
 import type { CalculatedColumn, GroupRow, Omit } from './types';
 import { RowSelectionProvider } from './hooks';
 import { getRowStyle } from './utils';
+
+export const cellFrozenLast = css`
+  @layer rdg.Cell {
+    box-shadow: calc(2px * var(--rdg-sign)) 0 5px -2px rgba(136, 136, 136, 0.3);
+  }
+`;
+export const cell = css`
+  @layer rdg.Cell {
+    /* max-content does not work with size containment
+     * dynamically switching between different containment styles incurs a heavy relayout penalty
+     * Chromium bug: at odd zoom levels or subpixel positioning, layout/paint containment can make cell borders disappear
+     *   https://bugs.chromium.org/p/chromium/issues/detail?id=1326946
+     */
+    contain: style;
+    position: relative; /* needed for absolute positioning to work */
+    padding-block: 0;
+    padding-inline: 8px;
+    border-inline-end: 1px solid var(--rdg-border-color);
+    border-block-end: 1px solid var(--rdg-border-color);
+    grid-row-start: var(--rdg-grid-row-start);
+    background-color: inherit;
+
+    white-space: nowrap;
+    overflow: hidden;
+    overflow: clip;
+    text-overflow: ellipsis;
+    outline: none;
+
+    &[aria-selected='true'] {
+      outline: 2px solid var(--rdg-selection-color);
+      outline-offset: -2px;
+    }
+  }
+`;
 
 export interface GroupRowRendererProps<R, SR>
   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'style' | 'children'> {

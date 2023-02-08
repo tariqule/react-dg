@@ -2,10 +2,46 @@ import { memo } from 'react';
 import clsx from 'clsx';
 import { css } from '@linaria/core';
 
-import { cell, cellFrozen, rowClassname, rowSelectedClassname } from './style';
+import { rowClassname, rowSelectedClassname } from './style';
 import { getColSpan, getRowStyle } from './utils';
 import SummaryCell from './SummaryCell';
 import type { CalculatedColumn, RowRendererProps } from './types';
+
+export const cellFrozen = css`
+  @layer rdg.Cell {
+    position: sticky;
+    /* Should have a higher value than 0 to show up above unfrozen cells */
+    z-index: 1;
+  }
+`;
+const cell = css`
+  @layer rdg.Cell {
+    /* max-content does not work with size containment
+     * dynamically switching between different containment styles incurs a heavy relayout penalty
+     * Chromium bug: at odd zoom levels or subpixel positioning, layout/paint containment can make cell borders disappear
+     *   https://bugs.chromium.org/p/chromium/issues/detail?id=1326946
+     */
+    contain: style;
+    position: relative; /* needed for absolute positioning to work */
+    padding-block: 0;
+    padding-inline: 8px;
+    border-inline-end: 1px solid var(--rdg-border-color);
+    border-block-end: 1px solid var(--rdg-border-color);
+    grid-row-start: var(--rdg-grid-row-start);
+    background-color: inherit;
+
+    white-space: nowrap;
+    overflow: hidden;
+    overflow: clip;
+    text-overflow: ellipsis;
+    outline: none;
+
+    &[aria-selected='true'] {
+      outline: 2px solid var(--rdg-selection-color);
+      outline-offset: -2px;
+    }
+  }
+`;
 
 type SharedRowRendererProps<R, SR> = Pick<
   RowRendererProps<R, SR>,
