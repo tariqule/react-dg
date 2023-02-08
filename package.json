@@ -7,7 +7,7 @@
     "react",
     "data grid"
   ],
-  "repository": "github:adazzle/react-data-grid",
+  "repository": "https://github.com/tariqule/react-dg",
   "bugs": "https://github.com/adazzle/react-data-grid/issues",
   "type": "module",
   "exports": {
