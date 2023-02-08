@@ -1,6 +1,6 @@
 {
   "name": "react-dg",
-  "version": "7.0.0-beta.24",
+  "version": "7.0.0-beta.27",
   "license": "MIT",
   "description": "Feature-rich and customizable data grid React component",
   "keywords": [
@@ -97,10 +97,10 @@
     "postcss-loader": "^7.0.0",
     "postcss-nested": "^6.0.0",
     "prettier": "2.8.3",
-    "react": "^18.1.0",
+    "react": "^18.2.0",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
-    "react-dom": "^18.1.0",
+    "react-dom": "^18.2.0",
     "react-refresh": "^0.14.0",
     "react-router-dom": "^6.3.0",
     "rollup": "^3.14.0",
