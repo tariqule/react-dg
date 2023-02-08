@@ -1,6 +1,6 @@
 {
-  "name": "react-data-grid",
-  "version": "7.0.0-beta.22",
+  "name": "react-dg",
+  "version": "7.0.0-beta.23",
   "license": "MIT",
   "description": "Feature-rich and customizable data grid React component",
   "keywords": [
@@ -43,7 +43,7 @@
     "prettier:check": "prettier --check .",
     "prettier:format": "prettier --write .",
     "typecheck": "tsc",
-    "prepublishOnly": "yarn && yarn build && yarn build:types",
+    "prepublishOnly": "npm install && npm run build && npm run build:types",
     "postpublish": "git push --follow-tags origin HEAD"
   },
   "dependencies": {
@@ -103,7 +103,7 @@
     "react-dom": "^18.1.0",
     "react-refresh": "^0.14.0",
     "react-router-dom": "^6.3.0",
-    "rollup": "^3.2.2",
+    "rollup": "^3.14.0",
     "rollup-plugin-postcss": "^4.0.2",
     "rome": "^11.0.0",
     "style-loader": "^3.3.1",
